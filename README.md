@@ -11,3 +11,4 @@ Je suis pas sûr mais c'est une piste
 - AmiAmi https://www.amiami.jp
 - Bilibili https://www.bilibili.com
 - Github https://github.com
+_Repo cloné et ouvert dans VS Code._
