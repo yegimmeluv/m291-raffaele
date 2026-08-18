@@ -1,4 +1,4 @@
-# M291 — Prénom ou alias
+# M291 — Raff tu connais
 Je suis en 3ème année de **médiamatique** hein
 ## Ce que je veux apprendre :
 - Le code
