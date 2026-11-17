@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr" data-theme="maquette">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#737373"><title>Swipeat — Maquette 5</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <button class="menu-btn" aria-label="Ouvrir le menu" id="menuToggle">☰</button>
+    <h1 class="brand"><a href="#swipe" data-view="swipe" aria-label="Swipeat accueil"><span>swipe</span><b>at</b><i></i></a></h1>
+    <nav class="header-nav" aria-label="Navigation principale">
+      <!-- La barre de recherche et les filtres viendront en semaine 12. -->
+    </nav>
+    <div class="avatar" aria-label="Profil de Raffaele">R</div>
+  </header>
+  <div class="layout">
+    <aside class="sidebar"><div class="side-intro"><span class="eyebrow">TON COMPAGNON CUISINE</span><h2>Bien manger,<br>sans se ruiner.</h2><p>Des idées simples, testées par la communauté étudiante.</p></div><nav aria-label="Navigation des recettes"><button class="nav-link active" data-view="swipe"><span>✳</span> Découvrir</button><button class="nav-link" data-view="library"><span>▤</span> Mes recettes <em id="myCount">2</em></button><button class="nav-link" data-view="publish"><span>＋</span> Partager une recette</button></nav><div class="sidebar-note"><strong>Le bon plan du jour</strong><p>Un plat complet à moins de 3 € par personne.</p><span>🥕 12 recettes petit budget</span></div></aside>
+    <main>
+      <section class="view active" id="swipeView">
+        <div class="section-heading"><div><span class="eyebrow">TROUVE TON PROCHAIN PLAT</span><h2>SMASH OR PASS !</h2></div><button class="filter-trigger" id="openFilters"><span>☷</span> Filtrer <small id="filterCount">0</small></button></div>
+        <div class="recherche">
+          <label for="recherche">Chercher une recette, un ingrédient ou un régime</label>
+          <input type="search" id="recherche" placeholder="Ex. pâtes, lentilles, vegan…">
+          <p id="aucun-resultat" hidden>Aucune recette ne correspond à ta recherche.</p>
+        </div>
+        <p id="etat-recettes" class="etat" role="status" hidden></p>
+        <div class="swipe-grid"><article class="recipe-card" id="recipeCard"><div class="food-visual" id="foodVisual"><span class="food-emoji">🍝</span><span class="photo-label">LA RECETTE DU MOMENT</span><button class="detail-button" id="detailButton" aria-label="Voir le détail">↗</button></div><div class="recipe-info"><div class="recipe-title-row"><div><span class="eyebrow" id="author">PAR LÉA · 2E ANNÉE</span><h3 id="recipeName">Pâtes crémeuses aux champignons</h3></div><span class="price" id="price">2,40 €<small>/ pers.</small></span></div><div class="recipe-meta"><span>◷ <b id="time">20 min</b></span><span>⌁ <b id="difficulty">Facile</b></span><span>♡ <b id="protein">18 g prot.</b></span></div><div class="tags" id="recipeTags"></div><div class="card-footer"><span class="community">♡ <b id="smashCount">38</b> smash</span><span class="counter" id="counter">01 <i>/ 08</i></span></div></div></article>
+          <aside class="swipe-side"><div class="daily-tip"><span class="tip-icon">✦</span><span class="eyebrow">LE PETIT CONSEIL</span><p>Les champignons en conserve, c’est pratique, bon et souvent moins cher.</p><small>— l’équipe Swipeat</small></div><div class="swipe-actions"><button class="action-btn pass" id="passBtn"><span>×</span><small>Passer</small></button><button class="action-btn smash" id="smashBtn"><span>♥</span><small>Smash !</small></button></div><p class="swipe-hint">Choisis au feeling. Tu retrouveras tes coups de cœur dans ta bibliothèque.</p></aside></div>
+        <div class="mobile-actions"><button class="action-btn pass" id="passBtnMobile"><span>×</span><small>Passer</small></button><button class="action-btn smash" id="smashBtnMobile"><span>♥</span><small>Smash !</small></button></div>
+      </section>
+      <section class="view" id="libraryView"><div class="section-heading"><div><span class="eyebrow">TON CARNET DE CUISINE</span><h2>Mes recettes</h2></div><button class="primary-button" data-view="publish">＋ Ajouter</button></div><div class="tabs"><button class="tab active" data-tab="mine">Mes créations <span id="mineCount">2</span></button><button class="tab" data-tab="liked">Mes smash <span id="likedCount">0</span></button></div><div class="library-grid cartes-grille" id="libraryGrid"></div></section>
+      <section class="view" id="publishView"><div class="section-heading"><div><span class="eyebrow">À TOI DE JOUER</span><h2>Ta recette mérite sa place.</h2></div></div><form id="recipeForm" class="publish-form"><label class="upload-box" for="imageInput"><span class="upload-preview" id="uploadPreview">＋</span><span><strong>Ajoute une photo appétissante</strong><small>Une image aide les autres à se projeter</small></span><input id="imageInput" type="file" accept="image/*"></label><div class="form-grid"><label>Nom de la recette<input name="name" placeholder="Ex. Le dahl de fin de mois" required></label><label>Prix par personne<input name="price" type="number" min="0" step="0.05" placeholder="2.50" required></label><label>Temps de préparation (min)<input name="time" type="number" min="1" placeholder="25" required></label><label>Protéines par portion (g)<input name="protein" type="number" min="0" placeholder="18"></label></div><label>Ingrédients <small class="hint">Un ingrédient par ligne, avec les quantités</small><textarea name="ingredients" rows="4" placeholder="200 g de lentilles corail&#10;1 oignon&#10;400 ml de lait de coco" required></textarea></label><label>Étapes de préparation<textarea name="steps" rows="4" placeholder="Raconte les étapes simplement…" required></textarea></label><fieldset><legend>Étiquettes alimentaires</legend><div class="choice-list" id="publishTags"></div></fieldset><button class="primary-button submit-button" type="submit">Publier ma recette <span>→</span></button></form></section>
+      <footer><p>© 2026 — Raffaele <span>✳</span></p></footer>
+    </main>
+  </div>
+  <nav class="bottom-nav"><button class="nav-link" data-view="library"><span>▤</span> Mes recettes</button><button class="nav-link" data-view="publish"><span>＋</span> Créer</button></nav>
+  <div class="modal-backdrop" id="filterModal"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="filterTitle"><div class="modal-heading"><div><span class="eyebrow">À TON GOÛT</span><h2 id="filterTitle">On cherche quoi ?</h2></div><button class="icon-button" id="closeFilters" aria-label="Fermer">×</button></div><fieldset><legend>Mes préférences</legend><div class="choice-list" id="filterTags"></div></fieldset><div class="range-row"><label for="budgetRange">Budget maximum <strong id="budgetValue">5 € / pers.</strong></label><input type="range" id="budgetRange" min="1" max="10" value="5"></div><div class="range-row"><label for="timeRange">Temps maximum <strong id="timeValue">45 min</strong></label><input type="range" id="timeRange" min="10" max="60" step="5" value="45"></div><button class="primary-button full-button" id="applyFilters">Voir les recettes <span>→</span></button><button class="text-button" id="clearFilters">Effacer les filtres</button></section></div>
+  <div class="modal-backdrop" id="detailModal"><section class="modal detail-modal" role="dialog" aria-modal="true"><button class="icon-button close-detail" id="closeDetail" aria-label="Fermer">×</button><div id="detailContent"></div></section></div><div class="toast" id="toast" role="status"></div>
+  <script src="js/app.js"></script>
+</body></html>

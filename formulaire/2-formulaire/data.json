@@ -1,0 +1,701 @@
+[
+  {
+    "id": 1,
+    "name": "Pâtes crémeuses aux champignons",
+    "emoji": "🍝",
+    "price": 2.4,
+    "time": 20,
+    "protein": 18,
+    "difficulty": "Facile",
+    "petitBudget": false,
+    "tags": [
+      "Végétarien"
+    ],
+    "smashes": 38,
+    "author": "PAR LÉA · 2E ANNÉE",
+    "ingredients": [
+      "200 g de pâtes",
+      "150 g de champignons",
+      "10 cl de crème",
+      "1 gousse d’ail",
+      "Un peu de persil"
+    ],
+    "steps": "Fais cuire les pâtes. Fais dorer les champignons et l’ail, ajoute la crème puis mélange le tout avec un peu d’eau de cuisson."
+  },
+  {
+    "id": 2,
+    "name": "Bowl croustillant pois chiches",
+    "emoji": "🥙",
+    "price": 2.1,
+    "time": 25,
+    "protein": 16,
+    "difficulty": "Facile",
+    "petitBudget": false,
+    "tags": [
+      "Vegan",
+      "Sans lactose"
+    ],
+    "smashes": 24,
+    "author": "PAR SAMIR · 1RE ANNÉE",
+    "ingredients": [
+      "1 boîte de pois chiches",
+      "1 carotte",
+      "100 g de semoule",
+      "Citron et paprika"
+    ],
+    "steps": "Fais griller les pois chiches au paprika. Prépare la semoule et assemble avec la carotte râpée et le citron."
+  },
+  {
+    "id": 3,
+    "name": "Curry de lentilles coco",
+    "emoji": "🍛",
+    "price": 1.85,
+    "time": 30,
+    "protein": 21,
+    "difficulty": "Facile",
+    "petitBudget": true,
+    "tags": [
+      "Vegan",
+      "Sans lactose",
+      "Sans gluten",
+      "Protéiné"
+    ],
+    "smashes": 52,
+    "author": "PAR MAYA · 3E ANNÉE",
+    "ingredients": [
+      "150 g de lentilles corail",
+      "20 cl de lait de coco",
+      "1 oignon",
+      "1 c. à soupe de curry"
+    ],
+    "steps": "Fais revenir l’oignon et le curry. Ajoute les lentilles et le lait de coco avec un verre d’eau. Laisse mijoter 20 minutes."
+  },
+  {
+    "id": 4,
+    "name": "Wrap poulet & sauce yaourt",
+    "emoji": "🌯",
+    "price": 2.95,
+    "time": 18,
+    "protein": 28,
+    "difficulty": "Facile",
+    "petitBudget": false,
+    "tags": [
+      "Halal",
+      "Protéiné"
+    ],
+    "smashes": 31,
+    "author": "PAR ADAM · 2E ANNÉE",
+    "ingredients": [
+      "1 tortilla",
+      "100 g de poulet",
+      "1 yaourt nature",
+      "Salade et concombre"
+    ],
+    "steps": "Fais cuire le poulet en morceaux. Mélange le yaourt avec du citron, garnis la tortilla et roule."
+  },
+  {
+    "id": 5,
+    "name": "Riz sauté aux légumes",
+    "emoji": "🍚",
+    "price": 1.7,
+    "time": 15,
+    "protein": 12,
+    "difficulty": "Très facile",
+    "petitBudget": true,
+    "tags": [
+      "Vegan",
+      "Sans lactose"
+    ],
+    "smashes": 19,
+    "author": "PAR EMMA · 1RE ANNÉE",
+    "ingredients": [
+      "150 g de riz cuit",
+      "Petits pois",
+      "1 carotte",
+      "Sauce soja"
+    ],
+    "steps": "Fais revenir les légumes puis ajoute le riz froid. Assaisonne avec la sauce soja."
+  },
+  {
+    "id": 6,
+    "name": "Shakshuka express",
+    "emoji": "🍳",
+    "price": 2.2,
+    "time": 22,
+    "protein": 17,
+    "difficulty": "Facile",
+    "petitBudget": false,
+    "tags": [
+      "Végétarien",
+      "Sans gluten",
+      "Protéiné"
+    ],
+    "smashes": 46,
+    "author": "PAR NOÉ · 2E ANNÉE",
+    "ingredients": [
+      "2 œufs",
+      "200 g de tomates concassées",
+      "1 poivron",
+      "Paprika"
+    ],
+    "steps": "Fais compoter le poivron et les tomates avec le paprika. Casse les œufs dedans, couvre et cuis 6 minutes."
+  },
+  {
+    "id": 7,
+    "name": "Salade de quinoa citronnée",
+    "emoji": "🥗",
+    "price": 2.65,
+    "time": 20,
+    "protein": 14,
+    "difficulty": "Facile",
+    "petitBudget": false,
+    "tags": [
+      "Vegan",
+      "Sans lactose",
+      "Sans gluten"
+    ],
+    "smashes": 27,
+    "author": "PAR INÈS · 3E ANNÉE",
+    "ingredients": [
+      "100 g de quinoa",
+      "1/2 concombre",
+      "1 tomate",
+      "Citron et menthe"
+    ],
+    "steps": "Cuis le quinoa puis laisse-le refroidir. Ajoute les légumes coupés et une vinaigrette au citron."
+  },
+  {
+    "id": 8,
+    "name": "Gratin de pommes de terre",
+    "emoji": "🥔",
+    "price": 2.35,
+    "time": 45,
+    "protein": 13,
+    "difficulty": "Facile",
+    "petitBudget": false,
+    "tags": [
+      "Végétarien",
+      "Sans gluten"
+    ],
+    "smashes": 33,
+    "author": "PAR LOU · 1RE ANNÉE",
+    "ingredients": [
+      "3 pommes de terre",
+      "20 cl de crème",
+      "Un peu de fromage",
+      "Muscade"
+    ],
+    "steps": "Coupe finement les pommes de terre. Dispose-les avec la crème et la muscade, puis enfourne 35 minutes."
+  },
+  {
+    "id": 9,
+    "name": "Croque-monsieur maison",
+    "emoji": "🥪",
+    "price": 1.9,
+    "time": 12,
+    "protein": 16,
+    "difficulty": "Très facile",
+    "petitBudget": true,
+    "tags": [
+      "Protéiné"
+    ],
+    "smashes": 22,
+    "author": "PAR YANIS · 2E ANNÉE",
+    "ingredients": [
+      "4 tranches de pain de mie",
+      "2 tranches de jambon",
+      "Fromage râpé",
+      "Un peu de beurre"
+    ],
+    "steps": "Garnis le pain avec le jambon et le fromage, beurre l’extérieur et dore à la poêle 3 minutes par face."
+  },
+  {
+    "id": 10,
+    "name": "Soupe de lentilles corail",
+    "emoji": "🥣",
+    "price": 1.3,
+    "time": 25,
+    "protein": 15,
+    "difficulty": "Très facile",
+    "petitBudget": true,
+    "tags": [
+      "Vegan",
+      "Sans lactose",
+      "Sans gluten"
+    ],
+    "smashes": 29,
+    "author": "PAR CHLOÉ · 1RE ANNÉE",
+    "ingredients": [
+      "100 g de lentilles corail",
+      "1 carotte",
+      "1 oignon",
+      "1 cube de bouillon"
+    ],
+    "steps": "Fais revenir l’oignon, ajoute la carotte en dés, les lentilles et 50 cl de bouillon. Cuis 20 minutes et mixe."
+  },
+  {
+    "id": 11,
+    "name": "Röstis express",
+    "emoji": "🥔",
+    "price": 1.6,
+    "time": 25,
+    "protein": 6,
+    "difficulty": "Facile",
+    "petitBudget": true,
+    "tags": [
+      "Végétarien",
+      "Sans gluten"
+    ],
+    "smashes": 35,
+    "author": "PAR LUCA · 3E ANNÉE",
+    "ingredients": [
+      "2 pommes de terre",
+      "1 œuf",
+      "Sel, poivre",
+      "Huile"
+    ],
+    "steps": "Râpe les pommes de terre, essore-les, mélange avec l’œuf et fais dorer des galettes à la poêle."
+  },
+  {
+    "id": 12,
+    "name": "Chili sin carne",
+    "emoji": "🌶️",
+    "price": 2.3,
+    "time": 35,
+    "protein": 19,
+    "difficulty": "Facile",
+    "petitBudget": false,
+    "tags": [
+      "Vegan",
+      "Sans lactose",
+      "Sans gluten",
+      "Protéiné"
+    ],
+    "smashes": 41,
+    "author": "PAR LÉA · 2E ANNÉE",
+    "ingredients": [
+      "1 boîte de haricots rouges",
+      "1 boîte de tomates",
+      "1 boîte de maïs",
+      "1 oignon",
+      "Cumin et paprika"
+    ],
+    "steps": "Fais revenir l’oignon avec les épices, ajoute le reste et laisse mijoter 25 minutes."
+  },
+  {
+    "id": 13,
+    "name": "Tortilla patates-oignons",
+    "emoji": "🍳",
+    "price": 1.7,
+    "time": 30,
+    "protein": 14,
+    "difficulty": "Moyen",
+    "petitBudget": true,
+    "tags": [
+      "Végétarien",
+      "Sans gluten"
+    ],
+    "smashes": 18,
+    "author": "PAR SAMIR · 1RE ANNÉE",
+    "ingredients": [
+      "3 œufs",
+      "2 pommes de terre",
+      "1 oignon",
+      "Huile d’olive"
+    ],
+    "steps": "Cuis les pommes de terre et l’oignon en fines tranches, verse les œufs battus, cuis à feu doux puis retourne."
+  },
+  {
+    "id": 14,
+    "name": "Pâtes à la carbonara",
+    "emoji": "🍝",
+    "price": 2.6,
+    "time": 15,
+    "protein": 22,
+    "difficulty": "Facile",
+    "petitBudget": false,
+    "tags": [
+      "Protéiné"
+    ],
+    "smashes": 57,
+    "author": "PAR MAYA · 3E ANNÉE",
+    "ingredients": [
+      "150 g de spaghetti",
+      "2 jaunes d’œufs",
+      "50 g de lardons",
+      "Parmesan"
+    ],
+    "steps": "Cuis les pâtes. Mélange hors du feu avec les lardons dorés, les jaunes et le parmesan."
+  },
+  {
+    "id": 15,
+    "name": "Couscous aux légumes",
+    "emoji": "🥘",
+    "price": 2.4,
+    "time": 30,
+    "protein": 11,
+    "difficulty": "Facile",
+    "petitBudget": false,
+    "tags": [
+      "Vegan",
+      "Sans lactose"
+    ],
+    "smashes": 26,
+    "author": "PAR ADAM · 2E ANNÉE",
+    "ingredients": [
+      "100 g de semoule",
+      "1 courgette",
+      "1 carotte",
+      "Pois chiches",
+      "Ras el hanout"
+    ],
+    "steps": "Fais mijoter les légumes et les pois chiches avec les épices. Sers sur la semoule gonflée à l’eau chaude."
+  },
+  {
+    "id": 16,
+    "name": "Quesadillas fromage-haricots",
+    "emoji": "🌮",
+    "price": 2.1,
+    "time": 15,
+    "protein": 17,
+    "difficulty": "Très facile",
+    "petitBudget": false,
+    "tags": [
+      "Végétarien",
+      "Protéiné"
+    ],
+    "smashes": 34,
+    "author": "PAR EMMA · 1RE ANNÉE",
+    "ingredients": [
+      "2 tortillas",
+      "Haricots rouges",
+      "Fromage râpé",
+      "Salsa"
+    ],
+    "steps": "Garnis une tortilla, couvre avec l’autre et dore à la poêle 2 minutes par face. Coupe en parts."
+  },
+  {
+    "id": 17,
+    "name": "Porridge banane-cannelle",
+    "emoji": "🥣",
+    "price": 0.9,
+    "time": 8,
+    "protein": 9,
+    "difficulty": "Très facile",
+    "petitBudget": true,
+    "tags": [
+      "Végétarien"
+    ],
+    "smashes": 21,
+    "author": "PAR NOÉ · 2E ANNÉE",
+    "ingredients": [
+      "50 g de flocons d’avoine",
+      "25 cl de lait",
+      "1 banane",
+      "Cannelle"
+    ],
+    "steps": "Cuis les flocons dans le lait 5 minutes en remuant, ajoute la banane écrasée et la cannelle."
+  },
+  {
+    "id": 18,
+    "name": "Nouilles sautées au tofu",
+    "emoji": "🍜",
+    "price": 2.8,
+    "time": 20,
+    "protein": 20,
+    "difficulty": "Facile",
+    "petitBudget": false,
+    "tags": [
+      "Vegan",
+      "Sans lactose",
+      "Protéiné"
+    ],
+    "smashes": 38,
+    "author": "PAR INÈS · 3E ANNÉE",
+    "ingredients": [
+      "100 g de nouilles",
+      "150 g de tofu",
+      "1 poivron",
+      "Sauce soja"
+    ],
+    "steps": "Dore le tofu en cubes, ajoute le poivron puis les nouilles cuites et la sauce soja."
+  },
+  {
+    "id": 19,
+    "name": "Dahl de pois cassés",
+    "emoji": "🍛",
+    "price": 1.5,
+    "time": 40,
+    "protein": 18,
+    "difficulty": "Facile",
+    "petitBudget": true,
+    "tags": [
+      "Vegan",
+      "Sans lactose",
+      "Sans gluten",
+      "Protéiné"
+    ],
+    "smashes": 23,
+    "author": "PAR LOU · 1RE ANNÉE",
+    "ingredients": [
+      "120 g de pois cassés",
+      "1 oignon",
+      "Curcuma et cumin",
+      "20 cl de lait de coco"
+    ],
+    "steps": "Cuis les pois cassés 30 minutes avec l’oignon et les épices, puis ajoute le lait de coco."
+  },
+  {
+    "id": 20,
+    "name": "Pizza tortilla",
+    "emoji": "🍕",
+    "price": 2,
+    "time": 15,
+    "protein": 15,
+    "difficulty": "Très facile",
+    "petitBudget": false,
+    "tags": [
+      "Végétarien"
+    ],
+    "smashes": 47,
+    "author": "PAR YANIS · 2E ANNÉE",
+    "ingredients": [
+      "1 tortilla",
+      "Sauce tomate",
+      "Mozzarella",
+      "Origan"
+    ],
+    "steps": "Étale la sauce sur la tortilla, ajoute la mozzarella et passe 8 minutes au four à 200 °C."
+  },
+  {
+    "id": 21,
+    "name": "Œufs brouillés & toast",
+    "emoji": "🍞",
+    "price": 1.1,
+    "time": 10,
+    "protein": 14,
+    "difficulty": "Très facile",
+    "petitBudget": true,
+    "tags": [
+      "Végétarien",
+      "Protéiné"
+    ],
+    "smashes": 16,
+    "author": "PAR CHLOÉ · 1RE ANNÉE",
+    "ingredients": [
+      "2 œufs",
+      "1 tranche de pain",
+      "Un peu de beurre",
+      "Ciboulette"
+    ],
+    "steps": "Brouille les œufs à feu doux avec le beurre et sers sur le pain grillé avec la ciboulette."
+  },
+  {
+    "id": 22,
+    "name": "Taboulé maison",
+    "emoji": "🥗",
+    "price": 1.8,
+    "time": 15,
+    "protein": 7,
+    "difficulty": "Très facile",
+    "petitBudget": true,
+    "tags": [
+      "Vegan",
+      "Sans lactose"
+    ],
+    "smashes": 20,
+    "author": "PAR LUCA · 3E ANNÉE",
+    "ingredients": [
+      "100 g de semoule",
+      "1 tomate",
+      "1/2 concombre",
+      "Menthe, citron, huile d’olive"
+    ],
+    "steps": "Fais gonfler la semoule, ajoute les légumes en dés, la menthe, le citron et l’huile. Mets au frais."
+  },
+  {
+    "id": 23,
+    "name": "Poulet curry-riz",
+    "emoji": "🍛",
+    "price": 3,
+    "time": 25,
+    "protein": 30,
+    "difficulty": "Facile",
+    "petitBudget": false,
+    "tags": [
+      "Halal",
+      "Sans gluten",
+      "Protéiné"
+    ],
+    "smashes": 44,
+    "author": "PAR LÉA · 2E ANNÉE",
+    "ingredients": [
+      "120 g de poulet",
+      "100 g de riz",
+      "10 cl de crème",
+      "Curry"
+    ],
+    "steps": "Dore le poulet avec le curry, ajoute la crème et sers avec le riz cuit."
+  },
+  {
+    "id": 24,
+    "name": "Gnocchis poêlés tomate-mozza",
+    "emoji": "🍽️",
+    "price": 2.7,
+    "time": 15,
+    "protein": 12,
+    "difficulty": "Très facile",
+    "petitBudget": false,
+    "tags": [
+      "Végétarien"
+    ],
+    "smashes": 39,
+    "author": "PAR SAMIR · 1RE ANNÉE",
+    "ingredients": [
+      "250 g de gnocchis",
+      "Tomates cerises",
+      "1/2 mozzarella",
+      "Basilic"
+    ],
+    "steps": "Fais dorer les gnocchis à la poêle, ajoute les tomates puis la mozzarella et le basilic."
+  },
+  {
+    "id": 25,
+    "name": "Velouté de courge",
+    "emoji": "🎃",
+    "price": 1.4,
+    "time": 35,
+    "protein": 5,
+    "difficulty": "Facile",
+    "petitBudget": true,
+    "tags": [
+      "Vegan",
+      "Sans lactose",
+      "Sans gluten"
+    ],
+    "smashes": 17,
+    "author": "PAR MAYA · 3E ANNÉE",
+    "ingredients": [
+      "400 g de courge",
+      "1 oignon",
+      "1 cube de bouillon",
+      "Muscade"
+    ],
+    "steps": "Cuis la courge et l’oignon dans le bouillon 25 minutes, puis mixe avec la muscade."
+  },
+  {
+    "id": 26,
+    "name": "Bowl thon-avocat",
+    "emoji": "🐟",
+    "price": 3.4,
+    "time": 15,
+    "protein": 26,
+    "difficulty": "Facile",
+    "petitBudget": false,
+    "tags": [
+      "Sans lactose",
+      "Sans gluten",
+      "Protéiné"
+    ],
+    "smashes": 32,
+    "author": "PAR ADAM · 2E ANNÉE",
+    "ingredients": [
+      "100 g de riz",
+      "1 boîte de thon",
+      "1/2 avocat",
+      "Sauce soja"
+    ],
+    "steps": "Dispose le riz cuit, le thon émietté et l’avocat en tranches. Arrose de sauce soja."
+  },
+  {
+    "id": 27,
+    "name": "Crêpes salées jambon-fromage",
+    "emoji": "🥞",
+    "price": 1.9,
+    "time": 25,
+    "protein": 15,
+    "difficulty": "Moyen",
+    "petitBudget": true,
+    "tags": [
+      "Protéiné"
+    ],
+    "smashes": 28,
+    "author": "PAR EMMA · 1RE ANNÉE",
+    "ingredients": [
+      "125 g de farine",
+      "2 œufs",
+      "25 cl de lait",
+      "Jambon et fromage"
+    ],
+    "steps": "Prépare la pâte, cuis les crêpes et garnis-les de jambon et de fromage avant de les replier."
+  },
+  {
+    "id": 28,
+    "name": "Ratatouille simple",
+    "emoji": "🍆",
+    "price": 2.2,
+    "time": 40,
+    "protein": 4,
+    "difficulty": "Facile",
+    "petitBudget": false,
+    "tags": [
+      "Vegan",
+      "Sans lactose",
+      "Sans gluten"
+    ],
+    "smashes": 15,
+    "author": "PAR NOÉ · 2E ANNÉE",
+    "ingredients": [
+      "1 courgette",
+      "1 aubergine",
+      "1 poivron",
+      "1 boîte de tomates"
+    ],
+    "steps": "Coupe les légumes en dés et laisse-les mijoter 30 minutes avec les tomates et un peu d’huile."
+  },
+  {
+    "id": 29,
+    "name": "Galettes de flocons d’avoine",
+    "emoji": "🧆",
+    "price": 1.2,
+    "time": 20,
+    "protein": 10,
+    "difficulty": "Facile",
+    "petitBudget": true,
+    "tags": [
+      "Végétarien"
+    ],
+    "smashes": 12,
+    "author": "PAR INÈS · 3E ANNÉE",
+    "ingredients": [
+      "80 g de flocons d’avoine",
+      "1 œuf",
+      "Fromage râpé",
+      "1 carotte râpée"
+    ],
+    "steps": "Mélange tout, forme des galettes et fais-les dorer 4 minutes de chaque côté."
+  },
+  {
+    "id": 30,
+    "name": "Mug cake chocolat",
+    "emoji": "🍫",
+    "price": 0.8,
+    "time": 5,
+    "protein": 6,
+    "difficulty": "Très facile",
+    "petitBudget": true,
+    "tags": [
+      "Végétarien"
+    ],
+    "smashes": 63,
+    "author": "PAR LOU · 1RE ANNÉE",
+    "ingredients": [
+      "4 c. à soupe de farine",
+      "2 c. à soupe de cacao",
+      "3 c. à soupe de lait",
+      "1 œuf",
+      "Sucre"
+    ],
+    "steps": "Mélange tout dans un grand mug et passe 1 minute 30 au micro-ondes."
+  }
+]
