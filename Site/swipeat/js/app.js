@@ -19,9 +19,39 @@ function afficherRecettes(){let pool=filtered();document.getElementById("aucun-r
 function tagsMarkup(selected=new Set()){return labels.map(t=>`<label class="choice"><input type="checkbox" value="${t}" ${selected.has(t)?'checked':''}><span>${t}</span></label>`).join('')}
 function renderLibrary(){let items=activeTab==='mine'?mine:liked;$('#libraryGrid').innerHTML=items.length?items.map(r=>`<article class="library-card carte"><div class="library-photo" ${r.image?`style="background-image:url('${r.image}');background-size:cover;background-position:center;color:transparent"`:''}>${r.emoji||'🍲'}</div><div class="library-copy"><h3>${r.name}</h3><p>${Number(r.price).toFixed(2).replace('.',',')} € / pers. · ${r.time} min</p><div class="tags">${(r.tags||[]).slice(0,3).map(t=>`<span class="tag">${t}</span>`).join('')}</div><div class="library-stats"><span>♥ ${r.smashes||0} smash reçus</span><span>${activeTab==='mine'?'Ma recette':'Dans mes favoris'}</span></div></div></article>`).join(''):`<div class="empty-state">${activeTab==='mine'?'Tes créations apparaîtront ici.':'Pas encore de smash — découvre quelques recettes !'}</div>`;$('#mineCount').textContent=mine.length;$('#myCount').textContent=mine.length;$('#likedCount').textContent=liked.length}
 function setView(name){$$('.view').forEach(v=>v.classList.toggle('active',v.id===name+'View'));$$('.nav-link').forEach(b=>b.classList.toggle('active',b.dataset.view===name));if(name==='library')renderLibrary();fermerMenu();if(name==='report')renderSignalements();window.scrollTo({top:0,behavior:'smooth'})}
-function move(smash){let r=filtered()[index];if(!r){toast('Aucune recette : modifie tes filtres.');return}if(smash){if(!liked.some(x=>x.name===r.name)){liked.unshift({...r});localStorage.setItem('swipeat-site5-liked',JSON.stringify(liked));toast('Smash ! Ajoutée à tes recettes ❤️')}else toast('Déjà dans tes smash ❤️')}else toast('Recette passée. On continue !');index++;afficherRecettes()}
-let dragStart=null;const swipeCard=$('#recipeCard');swipeCard.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;dragStart={x:e.clientX,y:e.clientY,id:e.pointerId};swipeCard.setPointerCapture(e.pointerId);swipeCard.classList.add('dragging')});swipeCard.addEventListener('pointermove',e=>{if(!dragStart||dragStart.id!==e.pointerId)return;let dx=e.clientX-dragStart.x,dy=e.clientY-dragStart.y;if(Math.abs(dx)>Math.abs(dy)){swipeCard.style.transform=`translateX(${dx}px) rotate(${dx*.035}deg)`;swipeCard.classList.toggle('smash-preview',dx< -35);swipeCard.classList.toggle('pass-preview',dx>35)}});function finishSwipe(e){if(!dragStart)return;let dx=e.clientX-dragStart.x,dy=e.clientY-dragStart.y;swipeCard.classList.remove('dragging','smash-preview','pass-preview');swipeCard.style.transform='';dragStart=null;if(Math.abs(dx)>85&&Math.abs(dx)>Math.abs(dy)*1.15)move(dx<0)}swipeCard.addEventListener('pointerup',finishSwipe);swipeCard.addEventListener('pointercancel',()=>{dragStart=null;swipeCard.classList.remove('dragging','smash-preview','pass-preview');swipeCard.style.transform=''});
-$$('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));$('#passBtn').onclick=$('#passBtnMobile').onclick=()=>move(false);$('#smashBtn').onclick=$('#smashBtnMobile').onclick=()=>move(true);$('#openFilters').onclick=()=>$('#filterModal').classList.add('open');$('#closeFilters').onclick=()=>$('#filterModal').classList.remove('open');$('#filterModal').addEventListener('click',e=>{if(e.target.id==='filterModal')e.currentTarget.classList.remove('open')});$('#budgetRange').oninput=e=>{$('#budgetValue').textContent=e.target.value+' € / pers.'};$('#timeRange').oninput=e=>{$('#timeValue').textContent=e.target.value+' min'};$('#filterTags').innerHTML=tagsMarkup(filterTags);$('#publishTags').innerHTML=tagsMarkup();$('#applyFilters').onclick=()=>{filterTags=new Set($$('#filterTags input:checked').map(x=>x.value));budget=Number($('#budgetRange').value);maxTime=Number($('#timeRange').value);$('#filterCount').textContent=filterTags.size+(budget<5||maxTime<45?1:0);index=0;afficherRecettes();$('#filterModal').classList.remove('open');toast('Filtres appliqués')};$('#clearFilters').onclick=()=>{$$('#filterTags input').forEach(x=>x.checked=false);$('#budgetRange').value=10;$('#timeRange').value=60;$('#budgetValue').textContent='10 € / pers.';$('#timeValue').textContent='60 min';filterTags.clear();budget=10;maxTime=60;$('#filterCount').textContent='0';index=0;afficherRecettes()};$$('.tab').forEach(b=>b.onclick=()=>{$$('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');activeTab=b.dataset.tab;renderLibrary()});$('#imageInput').onchange=e=>{let f=e.target.files[0];if(!f)return;let reader=new FileReader();reader.onload=()=>{imageData=reader.result;$('#uploadPreview').style.backgroundImage=`url(${imageData})`;$('#uploadPreview').textContent=''};reader.readAsDataURL(f)};
+/* ===== Animations : petits outils (sans librairie) ===== */
+// Si la personne a demandé « moins d'animations » dans son système, on n'attend pas.
+const mouvementReduit=window.matchMedia("(prefers-reduced-motion: reduce)");
+const DUREE_SORTIE=320; // ms, doit correspondre à la durée des @keyframes envol-gauche / envol-droite
+let enAnimation=false;
+
+// Relance une animation CSS, même si la classe était déjà là.
+function rejouer(element,classe){
+  if(!element)return;
+  element.classList.remove(classe);
+  void element.offsetWidth;          // force le navigateur à « oublier » l'animation précédente
+  element.classList.add(classe);
+  element.addEventListener("animationend",function(){element.classList.remove(classe)},{once:true});
+}
+
+// La carte part à gauche (smash) ou à droite (pass), puis la suivante arrive.
+function animerSortie(smash,suite){
+  const carte=document.getElementById("recipeCard");
+  if(mouvementReduit.matches){suite();return}
+  enAnimation=true;
+  carte.classList.add(smash?"sortie-smash":"sortie-pass");
+  setTimeout(function(){
+    carte.classList.remove("sortie-smash","sortie-pass","dragging");
+    carte.style.transform="";
+    suite();
+    rejouer(carte,"entree");
+    enAnimation=false;
+  },DUREE_SORTIE);
+}
+
+function move(smash){if(enAnimation)return;let r=filtered()[index];if(!r){toast('Aucune recette : modifie tes filtres.');return}if(smash){$$('.smash').forEach(b=>rejouer(b,'pop'));if(!liked.some(x=>x.name===r.name)){liked.unshift({...r});localStorage.setItem('swipeat-site5-liked',JSON.stringify(liked));$$('.nav-link[data-view=library]').forEach(b=>rejouer(b,'bump'));toast('Smash ! Ajoutée à tes recettes ❤️')}else toast('Déjà dans tes smash ❤️')}else toast('Recette passée. On continue !');animerSortie(smash,function(){index++;afficherRecettes()})}
+let dragStart=null;const swipeCard=$('#recipeCard');swipeCard.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;if(enAnimation)return;swipeCard.classList.remove('retour','entree');swipeCard.style.transform='';dragStart={x:e.clientX,y:e.clientY,id:e.pointerId};swipeCard.setPointerCapture(e.pointerId);swipeCard.classList.add('dragging')});swipeCard.addEventListener('pointermove',e=>{if(!dragStart||dragStart.id!==e.pointerId)return;let dx=e.clientX-dragStart.x,dy=e.clientY-dragStart.y;if(Math.abs(dx)>Math.abs(dy)){swipeCard.style.transform=`translateX(${dx}px) rotate(${dx*.035}deg)`;swipeCard.classList.toggle('smash-preview',dx< -35);swipeCard.classList.toggle('pass-preview',dx>35)}});function finishSwipe(e){if(!dragStart)return;let dx=e.clientX-dragStart.x,dy=e.clientY-dragStart.y;swipeCard.classList.remove('dragging','smash-preview','pass-preview');dragStart=null;if(Math.abs(dx)>85&&Math.abs(dx)>Math.abs(dy)*1.15){move(dx<0)}else{swipeCard.classList.add('retour');swipeCard.addEventListener('animationend',function fin(ev){if(ev.animationName!=='retour-centre')return;swipeCard.removeEventListener('animationend',fin);swipeCard.style.transform='';swipeCard.classList.remove('retour')})}}swipeCard.addEventListener('pointerup',finishSwipe);swipeCard.addEventListener('pointercancel',()=>{dragStart=null;swipeCard.classList.remove('dragging','smash-preview','pass-preview');swipeCard.style.transform=''});
+$$('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));$('#passBtn').onclick=$('#passBtnMobile').onclick=()=>move(false);$('#smashBtn').onclick=$('#smashBtnMobile').onclick=()=>move(true);$('#openFilters').onclick=()=>$('#filterModal').classList.add('open');$('#closeFilters').onclick=()=>$('#filterModal').classList.remove('open');$('#filterModal').addEventListener('click',e=>{if(e.target.id==='filterModal')e.currentTarget.classList.remove('open')});$('#budgetRange').oninput=e=>{$('#budgetValue').textContent=e.target.value+' € / pers.'};$('#timeRange').oninput=e=>{$('#timeValue').textContent=e.target.value+' min'};$('#filterTags').innerHTML=tagsMarkup(filterTags);$('#publishTags').innerHTML=tagsMarkup();$('#applyFilters').onclick=()=>{filterTags=new Set($$('#filterTags input:checked').map(x=>x.value));budget=Number($('#budgetRange').value);maxTime=Number($('#timeRange').value);$('#filterCount').textContent=filterTags.size+(budget<5||maxTime<45?1:0);rejouer($('#filterCount'),'pop');index=0;afficherRecettes();rejouer($('#recipeCard'),'entree');$('#filterModal').classList.remove('open');toast('Filtres appliqués')};$('#clearFilters').onclick=()=>{$$('#filterTags input').forEach(x=>x.checked=false);$('#budgetRange').value=10;$('#timeRange').value=60;$('#budgetValue').textContent='10 € / pers.';$('#timeValue').textContent='60 min';filterTags.clear();budget=10;maxTime=60;$('#filterCount').textContent='0';index=0;afficherRecettes()};$$('.tab').forEach(b=>b.onclick=()=>{$$('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');activeTab=b.dataset.tab;renderLibrary()});$('#imageInput').onchange=e=>{let f=e.target.files[0];if(!f)return;let reader=new FileReader();reader.onload=()=>{imageData=reader.result;$('#uploadPreview').style.backgroundImage=`url(${imageData})`;$('#uploadPreview').textContent=''};reader.readAsDataURL(f)};
 $('#detailButton').onclick=()=>{let r=filtered()[index];if(!r)return;$('#detailContent').innerHTML=`<h2>${r.emoji} ${r.name}</h2><p>${Number(r.price).toFixed(2)} € / pers. · ${r.time} min · ${r.protein} g de protéines</p><h3>Ingrédients</h3><ul>${r.ingredients.map(i=>`<li>${i}</li>`).join('')}</ul><h3>Préparation</h3><p>${r.steps}</p><div class="tags">${r.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>`;$('#detailModal').classList.add('open')};$('#closeDetail').onclick=()=>$('#detailModal').classList.remove('open');$('#detailModal').onclick=e=>{if(e.target.id==='detailModal')e.currentTarget.classList.remove('open')};document.addEventListener('keydown',e=>{if(e.key==='Escape')$$('.modal-backdrop').forEach(m=>m.classList.remove('open'));if(e.target.closest('input,textarea'))return;if(e.key==='ArrowRight')move(false);if(e.key==='ArrowLeft')move(true)});renderLibrary();
 
 /* ===== Semaine 12 · Exercice 3 : la recherche ===== */
@@ -64,6 +94,7 @@ formulaire.addEventListener("submit",function(event){
   const zoneErreurs=document.getElementById("erreurs");
   if(erreurs.length>0){
     zoneErreurs.textContent="Erreur : "+erreurs.join(" ");
+    rejouer(zoneErreurs,"secoue");
     document.getElementById(champFautif).focus();
     return;
   }
@@ -174,6 +205,7 @@ formulaireSignalement.addEventListener("submit",function(event){
   const zoneOk=document.getElementById("signalement-ok");
   if(erreurs.length>0){
     zoneErreurs.textContent="Erreur : "+erreurs.join(" ");
+    rejouer(zoneErreurs,"secoue");
     zoneOk.textContent="";
     document.getElementById(champFautif).focus();
     return;

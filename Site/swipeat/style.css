@@ -95,12 +95,11 @@ button { cursor: pointer; }
   height: 3px;
   border-radius: 3px;
   background: var(--noir);
-  transition: transform .2s, top .2s, box-shadow .2s;
 }
 .menu-btn::before { top: 14px; box-shadow: 0 7px 0 var(--noir); }
 .menu-btn::after { top: 28px; }
-.menu-btn[aria-expanded="true"]::before { top: 20px; transform: rotate(45deg); box-shadow: none; }
-.menu-btn[aria-expanded="true"]::after { top: 20px; transform: rotate(-45deg); }
+.menu-btn[aria-expanded="true"]::before { animation: croix-haut .2s ease-out forwards; }
+.menu-btn[aria-expanded="true"]::after { animation: croix-bas .2s ease-out forwards; }
 .menu-btn:hover { background: var(--gris-clair); }
 
 .brand {
@@ -223,10 +222,8 @@ main { min-width: 0; }
   font-weight: 700;
   font-size: 15px;
   white-space: nowrap;
-  transition: background .15s, transform .15s;
 }
 .primary-button:hover { background: #2a2a2a; }
-.primary-button:active { transform: scale(.98); }
 
 .text-button {
   display: block;
@@ -337,9 +334,8 @@ main { min-width: 0; }
   touch-action: pan-y;
   user-select: none;
   cursor: grab;
-  transition: transform .25s ease, opacity .25s;
 }
-.recipe-card.dragging { transition: none; cursor: grabbing; }
+.recipe-card.dragging { cursor: grabbing; }
 
 .food-visual {
   position: relative;
@@ -505,12 +501,9 @@ main { min-width: 0; }
   border: 0;
   border-radius: 50%;
   box-shadow: var(--ombre-douce);
-  transition: transform .15s ease;
 }
 .action-btn span { font-size: 28px; line-height: 1; font-weight: 700; }
 .action-btn small { font-size: 11px; font-weight: 700; }
-.action-btn:hover { transform: translateY(-3px); }
-.action-btn:active { transform: scale(.94); }
 .pass { background: var(--blanc); color: var(--noir); }
 .smash { background: var(--orange); color: var(--noir); }
 .smash span { font-size: 32px; }
@@ -643,7 +636,6 @@ legend {
   color: var(--texte);
   font-size: 16px;
   resize: vertical;
-  transition: border-color .15s, background .15s;
 }
 .publish-form input:focus,
 .publish-form textarea:focus {
@@ -663,7 +655,6 @@ legend {
   border: 2px dashed #cfcfcf;
   border-radius: 18px;
   cursor: pointer;
-  transition: border-color .15s, background .15s;
 }
 .upload-box:hover { border-color: var(--orange); background: #fff8f4; }
 .upload-box:focus-within { outline: 3px solid var(--orange); outline-offset: 3px; }
@@ -697,7 +688,6 @@ legend { margin-bottom: var(--e1); padding: 0; }
   color: var(--texte);
   font-size: 14px;
   font-weight: 700;
-  transition: border-color .15s, background .15s;
 }
 .choice:hover span { border-color: #bdbdbd; }
 .choice input:checked + span { border-color: var(--noir); background: var(--noir); color: var(--blanc); }
@@ -808,10 +798,8 @@ legend { margin-bottom: var(--e1); padding: 0; }
   box-shadow: var(--ombre);
   opacity: 0;
   transform: translate(-50%, 16px);
-  transition: opacity .2s, transform .2s;
   pointer-events: none;
 }
-.toast.show { opacity: 1; transform: translate(-50%, 0); }
 
 /* ---------- Navigation mobile ---------- */
 .bottom-nav {
@@ -978,6 +966,208 @@ footer {
   *::before,
   *::after {
     animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
   }
+}
+
+
+/* ==========================================================================
+   Animations (@keyframes, CSS pur, sans librairie)
+   Le JavaScript ne fait qu'ajouter ou enlever des classes.
+   Tout est détaillé dans transitions.md.
+   ========================================================================== */
+
+:root {
+  --rapide: .15s;
+  --moyen: .3s;
+  --sortie: cubic-bezier(.2, .8, .2, 1);     /* démarre vite, se pose doucement */
+  --lance: cubic-bezier(.5, 0, .75, 0);      /* démarre lentement, accélère : un objet qu'on lance */
+  --rebond: cubic-bezier(.34, 1.56, .64, 1); /* dépasse un peu puis revient */
+}
+
+/* ---------- 1. La carte s'envole : gauche = Smash, droite = Passer ----------
+   Pas de « from » : l'animation part de la position actuelle de la carte,
+   même si on l'a glissée au doigt. */
+.recipe-card.sortie-smash { animation: envol-gauche .32s var(--lance) forwards; pointer-events: none; }
+.recipe-card.sortie-pass { animation: envol-droite .32s var(--lance) forwards; pointer-events: none; }
+@keyframes envol-gauche {
+  to { transform: translateX(-120%) rotate(-16deg); opacity: 0; }
+}
+@keyframes envol-droite {
+  to { transform: translateX(120%) rotate(16deg); opacity: 0; }
+}
+
+/* ---------- 2. La carte suivante arrive depuis la pile ---------- */
+.recipe-card.entree { animation: arrivee var(--moyen) var(--sortie); }
+@keyframes arrivee {
+  from { opacity: 0; transform: scale(.92) translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* 2b. Le prix tombe sur la photo comme un tampon */
+.recipe-card.entree .price { animation: tampon .45s var(--rebond) .1s both; }
+@keyframes tampon {
+  from { opacity: 0; transform: rotate(-10deg) scale(1.6); }
+  to { opacity: 1; transform: rotate(-10deg) scale(1); }
+}
+
+/* ---------- 3. Carte lâchée trop tôt : retour au centre avec rebond ---------- */
+.recipe-card.retour { animation: retour-centre .35s var(--rebond) forwards; }
+@keyframes retour-centre {
+  to { transform: none; }
+}
+
+/* 3b. Tampons SMASH / PASS pendant le glissement */
+.recipe-card.smash-preview::after,
+.recipe-card.pass-preview::after { animation: apparaitre-tampon .15s ease-out; }
+@keyframes apparaitre-tampon {
+  from { opacity: 0; scale: 1.3; }
+  to { opacity: 1; scale: 1; }
+}
+
+/* ---------- 4. Le cœur du bouton Smash bat une fois ---------- */
+.smash.pop span { animation: battement .45s var(--rebond); }
+@keyframes battement {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.45); }
+  100% { transform: scale(1); }
+}
+
+/* ---------- 5. « Mes recettes » saute : c'est là que la recette est rangée ---------- */
+.nav-link.bump { animation: saut .5s var(--rebond); }
+@keyframes saut {
+  0%, 100% { transform: none; }
+  40% { transform: translateY(-5px) scale(1.04); }
+}
+
+/* ---------- 6. Le nombre de filtres grossit une fois ---------- */
+#filterCount.pop { animation: grossir .4s var(--rebond); }
+@keyframes grossir {
+  50% { transform: scale(1.5); }
+}
+
+/* ---------- 7. Message d'erreur : secousse « non » ---------- */
+.secoue { animation: secousse .4s ease-in-out; }
+@keyframes secousse {
+  0%, 100% { transform: none; }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+/* ---------- 8. Changement de page ---------- */
+.view.active { animation: entree-vue .35s var(--sortie); }
+@keyframes entree-vue {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---------- 9. Messages qui apparaissent ---------- */
+#aucun-resultat:not([hidden]),
+.signalement-ok:not(:empty),
+.etat:not([hidden]) { animation: fondu .25s ease-out; }
+@keyframes fondu {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---------- 10. Chargement : un rond qui tourne ---------- */
+.etat-chargement::before {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 28px;
+  margin: 0 auto var(--e2);
+  border: 3px solid var(--gris-clair);
+  border-top-color: var(--orange);
+  border-radius: 50%;
+  animation: tourner .8s linear infinite;
+}
+@keyframes tourner {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- 11. Fenêtres (filtres, détail) et notification ---------- */
+.modal-backdrop.open { animation: fondu-fond .2s ease-out; }
+@keyframes fondu-fond {
+  from { opacity: 0; }
+}
+/* (la fenêtre elle-même monte avec @keyframes monter, plus haut dans le fichier) */
+
+.toast.show { animation: toast-monte .22s var(--sortie) forwards; }
+@keyframes toast-monte {
+  from { opacity: 0; transform: translate(-50%, 16px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* ---------- 12. Menu burger : les traits deviennent une croix ---------- */
+@keyframes croix-haut {
+  to { top: 20px; transform: rotate(45deg); box-shadow: none; }
+}
+@keyframes croix-bas {
+  to { top: 20px; transform: rotate(-45deg); }
+}
+/* (le menu descend avec @keyframes apparaitre, plus haut dans le fichier) */
+
+/* ---------- 13. Survol et clic ----------
+   Tout le mouvement est fait avec @keyframes. */
+.action-btn:hover { animation: soulever .15s var(--sortie) forwards; }
+.action-btn:active,
+.primary-button:active,
+.filter-trigger:active,
+.tab:active,
+.menu-item:active { animation: enfoncer .12s ease-out forwards; }
+.primary-button:hover,
+.filter-trigger:hover,
+.library-card:hover { animation: soulever-leger .15s var(--sortie) forwards; }
+.filter-trigger:hover,
+.library-card:hover { box-shadow: var(--ombre); }
+@keyframes soulever {
+  to { transform: translateY(-3px); }
+}
+@keyframes soulever-leger {
+  to { transform: translateY(-2px); }
+}
+@keyframes enfoncer {
+  to { transform: scale(.95); }
+}
+
+.detail-button:hover { animation: tourner-fleche .3s var(--rebond) forwards; }
+@keyframes tourner-fleche {
+  to { transform: rotate(45deg); }
+}
+
+.menu-item:hover span { animation: glisser .15s var(--sortie) forwards; }
+@keyframes glisser {
+  to { transform: translateX(3px); }
+}
+
+.upload-box:hover .upload-preview { animation: pencher .3s var(--rebond) forwards; }
+@keyframes pencher {
+  to { transform: rotate(-6deg) scale(1.05); }
+}
+
+/* 13b. Étiquette cochée (Vegan, Bug…) : grossit brièvement */
+.choice input:checked + span { animation: cocher .25s var(--rebond); }
+@keyframes cocher {
+  50% { transform: scale(1.08); }
+}
+
+.recherche input:focus { box-shadow: var(--ombre); }
+
+/* ---------- Accessibilité : « Réduire les animations » ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  .etat-chargement::before { animation: none; }
+  .action-btn:hover,
+  .primary-button:hover,
+  .filter-trigger:hover,
+  .library-card:hover,
+  .detail-button:hover,
+  .upload-box:hover .upload-preview { animation: none; }
 }
